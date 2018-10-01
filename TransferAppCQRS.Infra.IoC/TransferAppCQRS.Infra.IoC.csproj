@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TransferAppCQRS.Domain.Core\TransferAppCQRS.Domain.Core.csproj" />
+    <ProjectReference Include="..\TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj" />
+    <ProjectReference Include="..\TransferAppCQRS.Infra.CrossCutting.Bus\TransferAppCQRS.Infra.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\TransferAppCQRS.Infra.Data\TransferAppCQRS.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

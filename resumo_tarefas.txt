@@ -1,0 +1,36 @@
+        Aplicação transferAppCQRS (fase 1);
+		
+		- Realizar cadastro de cliente e conta;
+			- Validar usuário
+			- Gravar em Banco Sql;
+			- Notificar cadastro com sucesso;
+			- Logar cadastro com sucesso;
+		
+		- Realizar transferência entre contas:
+			- Verificar saldo suficiente;
+			- Verificar Conta destino;
+			
+			- Gravar operação em Banco Sql (histórico);			
+			- Gravar operação em MongoDb(Collection disponível por 30 dias);
+			
+			- Notificar Cliente origem e destino;
+			- Logar transferência com sucesso;
+					
+		- Consultar extrato;
+		
+		- Consultar Saldo;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		Aplicação transferAppCQRS (fase 2);
