@@ -1,3 +1,5 @@
+λ docker run -d -p 5672:5672 -p 15672:15672 --hostname my-rabbit --name some-rabbit rabbitmq:3-management
+
         Aplicação transferAppCQRS (fase 1);
 		
 		- Realizar cadastro de cliente e conta;
@@ -20,17 +22,162 @@
 		
 		- Consultar Saldo;
 		
+======================
+TODO:
+Criar estrutura para criação de conta
+	- ler no banco(SQL) o último número de conta na agência e iterar;
+	- verificar se usuário é válido no banco por cpf;
+	
+- transação de débito/crédito;
+	- se débito, verifica saldo;
+	
+- consulta de conta por usuário;
+
+- consulta de usuário por conta;
+
+- consulta de extrato
+
+- testes em batch:
+	- consultar usuário randomico e fazer transferência 
+	
 		
+======================
+Modelo de dados SQL
+
+tabela de clientes
+tabela de agências
+tabela de contas
+tabela de movimentações transferência
+tabela de movimentação de débito e crédito
+tabela de saldo 
 		
+Modelo de dados MongoDb	:
+	
+- coleção por usuário para extrato (com saldo anterior e novo saldo);
+	[TODO] - pesquisar qual é o tamanho indicado de itens de uma collection
+	
+- coleção de movimentações gerais
+	- cada item tem as seguintes propriedades:
+		- tipo de movimentação (transferência, saque, depósito);
+		- valor ;
+		- descrição;
+		- origem (Em caso de transferência);
 		
+- coleção de movimentações gerais por agência histórico;		
+
+- coleção de movimentações gerais por agência diária;
 		
+=========================
+
+tbl_cliente
+	id_cliente
+	nm_cliente
+	dt_nascimento
+	cd_documento
+	ds_email
+	dt_alteracao
+	dt_criacao
+	id_usuario
+---------------------				
+
+tabela de contas
+
+tbl_agencia 
+	cd_agencia
+	ds_estado
+	ds_cidade
+	ds_cep
+	ds_rua
+	ds_numero
+	ds_complemento
+	dt_alteracao
+	dt_criacao
+	id_usuario
+	
+tb_conta
+	id_agencia
+	id_cliente
+	cd_agencia
+	cd_conta
+	dt_alteracao
+	dt_criacao
+	id_usuario
+	
+---------------------
+
+tabela de movimentações transferência
+
+tbl_movimentacao_transferencia
+	id_transferencia (pk)
+	id_cliente_origem (fk)
+	id_cliente_destino (fk)
+	ds_descricao
+	vl_transacao
+	dt_transacao
+	
+---------------------
+
+tabela de movimentação de débito e crédito
+
+tbl_movimentacao_cred_deb	
+	id_movimentacao (pk)
+	id_conta (fk)
+	vl_transacao
+	dt_transacao
+	vl_saldo_anterior
+	vl_saldo_atual
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		Aplicação transferAppCQRS (fase 2);
+========================
+
+coleção de saldo 
+	id_conta
+	vl_salto
+	dt_alteracao
+	
+coleção de transação diária 
+
+coleção de transação histórica 
+
+
+	
+
+
+
+cd_agencia	int	
+ds_estado	varchar(2)	
+ds_cidade	varchar(100)	
+cd_cep	int	
+ds_rua	varchar(200)	
+ds_numero	varchar(20)	
+ds_complemento	varchar(50)	
+dt_alteracao	datetime	
+dt_criacao	datetime	
+id_usuario	int			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
