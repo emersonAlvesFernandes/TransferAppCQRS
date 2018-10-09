@@ -19,8 +19,4 @@
     <ProjectReference Include="..\TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Context\" />
-  </ItemGroup>
-
 </Project>
