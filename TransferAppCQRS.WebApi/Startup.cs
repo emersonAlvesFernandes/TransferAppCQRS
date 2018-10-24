@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
+using TransferAppCQRS.Infra.Data.Context;
 using TransferAppCQRS.Infra.IoC;
 using TransferAppCQRS.WebApi.Configurations;
 
@@ -40,17 +42,17 @@ namespace TransferAppCQRS.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(options =>
+            //services.AddDbContext<TransferAppCQRSContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
             //    .AddDefaultTokenProviders();
-            
+
             services.AddWebApi(options =>
             {
                 options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
-                options.UseCentralRoutePrefix(new RouteAttribute("api/v{version}"));
+                options.UseCentralRoutePrefix(new RouteAttribute("api/{version}"));
             });
 
 
@@ -60,6 +62,7 @@ namespace TransferAppCQRS.WebApi
             //    options.AddPolicy("CanRemoveCustomerData", policy => policy.Requirements.Add(new ClaimRequirement("Customers", "Remove")));
             //});
 
+            //services.AddAutoMapperSetup(); old reference
             services.AddAutoMapper();
             
             services.AddSwaggerGen(s =>
@@ -105,17 +108,17 @@ namespace TransferAppCQRS.WebApi
                 c.AllowAnyOrigin();
             });
 
+            app.UseStaticFiles();
             //app.UseAuthentication();
             app.UseMvc();
 
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Equinox Project API v1.1");
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Transfer App API v1");
             });
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            //app.UseHttpsRedirection();            
         }
 
         private static void RegisterServices(IServiceCollection services)

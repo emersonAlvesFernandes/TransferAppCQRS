@@ -25,7 +25,8 @@ namespace TransferAppCQRS.WebApi.Controllers
             IMapper mapper,
             ICustomerRepository customerRepository,
             IEventStore eventStoreRepository,
-            IMediatorHandler bus) : base(notifications)
+            IMediatorHandler bus,
+            IMediatorHandler mediator) : base(notifications, mediator)
         {
             _mapper = mapper;
             _customerRepository = customerRepository;

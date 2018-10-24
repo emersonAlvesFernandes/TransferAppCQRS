@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using TransferAppCQRS.Domain.Core.Bus;
 using TransferAppCQRS.Domain.Core.Notifications;
 
 namespace TransferAppCQRS.WebApi.Controllers
@@ -9,12 +10,15 @@ namespace TransferAppCQRS.WebApi.Controllers
     public class ApiController : ControllerBase
     {
         private readonly DomainNotificationHandler _notifications;
+        private readonly IMediatorHandler _mediator;
 
         protected IEnumerable<DomainNotification> Notifications => _notifications.GetNotifications();
 
-        protected ApiController(INotificationHandler<DomainNotification> notifications)
+        protected ApiController(INotificationHandler<DomainNotification> notifications,
+                                IMediatorHandler mediator)
         {
             _notifications = (DomainNotificationHandler)notifications;
+            _mediator = mediator;
         }
 
         protected bool IsValidOperation()
