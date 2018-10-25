@@ -15,13 +15,13 @@ namespace TransferAppCQRS.Domain.CommandHandlers
     {
         private readonly TransferSqlRepository _sqlRepository;
         private readonly IAccountRepository _sqlAccountRepository;
-        private readonly IMediatorHandler _bus;
+        private readonly IMediatorHandler _bus;        
 
         public TransferCommandHandler(
             TransferSqlRepository sqlRepository,
             IAccountRepository sqlAccountRepository,
             IUnitOfWork uow,
-            IMediatorHandler bus,
+            IMediatorHandler bus,            
             INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _sqlRepository = sqlRepository;
@@ -31,22 +31,34 @@ namespace TransferAppCQRS.Domain.CommandHandlers
 
         public Task Handle(RegisterNewTransferCommand command, CancellationToken cancellationToken)
         {
-
             if (command.IsValid())
             {
                 NotifyValidationErrors(command);
                 return Task.FromResult<object>(null);
             }
+            
+            var origin = _sqlAccountRepository.GetById(command.OriginId);
+            if (origin == null)
+            {
+                _bus.RaiseEvent(new DomainNotification(command.MessageType, "Invalid Origin Account."));
+                return Task.CompletedTask;
+            }
+                
+            var recipient = _sqlAccountRepository.GetById(command.OriginId);
+            if (recipient == null)
+            {                
+                _bus.RaiseEvent(new DomainNotification(command.MessageType, "Invalid Recipient."));
+                return Task.CompletedTask;
+            }
 
             ValidateFunds(command);
 
-            ValidateRecipientAccount(command);
-
-            var transfer = new Transfer(Guid.NewGuid(), command.Origin, command.Recipient, command.Description, command.ScheduledDate, command.Value);
+            var transfer = new Transfer(Guid.NewGuid(), origin, recipient, command.Description, command.ScheduledDate, command.Value);
 
             _sqlRepository.Add(transfer);
-            _sqlAccountRepository.UpdateBalance(command.Origin.Agency, command.Origin.Number, command.Value);
-                        
+
+            this.UpdateTransferAccountsBalance(command);
+
             if (Commit())
                 _bus.RaiseEvent(new TransferRegisteredEvent(transfer.Id, transfer.Origin, transfer.Recipient, transfer.ScheduledDate, transfer.Value));
 
@@ -55,7 +67,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
 
         private bool ValidateFunds(RegisterNewTransferCommand command)
         {
-            var actualBalance = _sqlAccountRepository.GetBalance(command.Origin.Agency, command.Origin.Number);
+            var actualBalance = _sqlAccountRepository.GetBalance(command.OriginId);
 
             if (actualBalance < command.Value)
             {
@@ -66,17 +78,15 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             return true;
         }
 
-        private bool ValidateRecipientAccount(RegisterNewTransferCommand command)
+        private void UpdateTransferAccountsBalance(RegisterNewTransferCommand command)
         {
-            var destinationAccount = _sqlAccountRepository.Get(command.Recipient.Agency, command.Recipient.Number);
 
-            if (destinationAccount == null)
-            {
-                _bus.RaiseEvent(new DomainNotification(command.MessageType, "Invalid Recipient."));
-                return false;
-            }
+            var originBalance = _sqlAccountRepository.GetBalance(command.OriginId);
+            var updatedBalance = originBalance - command.Value;
 
-            return true;
-        }
+            _sqlAccountRepository.UpdateBalance(command.OriginId, 1);
+
+            _sqlAccountRepository.UpdateBalance(command.RecipientId, 1);
+        }               
     }
 }

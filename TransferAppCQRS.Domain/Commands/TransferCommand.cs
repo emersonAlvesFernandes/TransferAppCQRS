@@ -8,9 +8,11 @@ namespace TransferAppCQRS.Domain.Commands
     {
         public Guid Id { get; protected set; }
 
-        public Account Origin { get; protected set; }
+        //public Account Origin { get; protected set; }
+        public Guid OriginId { get; set; }
 
-        public Account Recipient { get; protected set; }
+        //public Account Recipient { get; protected set; }
+        public Guid RecipientId { get; set; }
 
         public string Description { get; protected set; }
 

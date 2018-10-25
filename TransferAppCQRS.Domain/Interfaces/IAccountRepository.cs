@@ -1,13 +1,14 @@
-﻿using TransferAppCQRS.Domain.Models;
+﻿using System;
+using TransferAppCQRS.Domain.Models;
 
 namespace TransferAppCQRS.Domain.Interfaces
 {
-    public interface IAccountRepository
+    public interface IAccountRepository : IRepository<Account>
     {
-        double GetBalance(int agency, int number);
+        double GetBalance(Guid guid);
 
         Account Get(int agency, int number);
 
-        void UpdateBalance(int agency, int number, double value);
+        void UpdateBalance(Guid guid, double value);
     }
 }
