@@ -13,11 +13,8 @@ namespace TransferAppCQRS.WebApi.Controllers
     public class CustomerController : ApiController
     {
         private readonly IMapper _mapper;
-
         private readonly ICustomerRepository _customerRepository;
-
         private readonly IEventStore _eventStoreRepository;
-
         private readonly IMediatorHandler Bus;
 
         public CustomerController(
@@ -36,7 +33,7 @@ namespace TransferAppCQRS.WebApi.Controllers
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteCustomerData")]
-        [Route("customer-management")]
+        [Route("customer")]
         public IActionResult Post([FromBody]CustomerViewModel customerViewModel)
         {
             if (!ModelState.IsValid)

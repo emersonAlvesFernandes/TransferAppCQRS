@@ -3,7 +3,7 @@ using TransferAppCQRS.Domain.Models;
 
 namespace TransferAppCQRS.Domain.Interfaces
 {
-    public interface IAccountRepository : IRepository<Account>
+    public interface IAccountRepository : IBaseRepository<Account>
     {
         double GetBalance(Guid guid);
 

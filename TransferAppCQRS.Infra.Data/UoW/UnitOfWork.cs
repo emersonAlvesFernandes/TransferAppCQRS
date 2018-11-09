@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TransferAppCQRS.Domain.Core.Commands;
-using TransferAppCQRS.Domain.Interfaces;
+﻿using TransferAppCQRS.Domain.Interfaces;
+using TransferAppCQRS.Infra.Data.Context;
 
 namespace TransferAppCQRS.Infra.Data.UoW
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public CommandResponse Commit()
+        private readonly TransferAppCQRSContext _context;
+        public UnitOfWork(TransferAppCQRSContext context)
         {
-            return new CommandResponse(true);
+            _context = context;
         }
 
-        public void Dispose()
-        {
-           
-        }
+        public bool Commit() => _context.SaveChanges() > 0;
+        public void Dispose() => _context.Dispose();
     }
 }

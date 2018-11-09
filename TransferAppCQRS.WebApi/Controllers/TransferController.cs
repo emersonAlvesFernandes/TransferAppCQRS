@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TransferAppCQRS.Domain.Commands;
 using TransferAppCQRS.Domain.Core.Bus;
 using TransferAppCQRS.Domain.Core.Notifications;

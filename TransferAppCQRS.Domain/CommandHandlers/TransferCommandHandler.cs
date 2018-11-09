@@ -80,13 +80,12 @@ namespace TransferAppCQRS.Domain.CommandHandlers
 
         private void UpdateTransferAccountsBalance(RegisterNewTransferCommand command)
         {
+            var originBalance = _sqlAccountRepository.GetBalance(command.OriginId);            
+            _sqlAccountRepository.UpdateBalance(command.OriginId, originBalance - command.Value);
 
-            var originBalance = _sqlAccountRepository.GetBalance(command.OriginId);
-            var updatedBalance = originBalance - command.Value;
 
-            _sqlAccountRepository.UpdateBalance(command.OriginId, 1);
-
-            _sqlAccountRepository.UpdateBalance(command.RecipientId, 1);
+            var recipientBalance = _sqlAccountRepository.GetBalance(command.RecipientId);
+            _sqlAccountRepository.UpdateBalance(command.RecipientId, recipientBalance + command.Value);
         }               
     }
 }

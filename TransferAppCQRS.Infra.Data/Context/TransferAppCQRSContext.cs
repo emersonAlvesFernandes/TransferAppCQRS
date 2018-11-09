@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TransferAppCQRS.Domain.Models;
 using TransferAppCQRS.Infra.Data.Mappings;
 
@@ -11,11 +8,19 @@ namespace TransferAppCQRS.Infra.Data.Context
 {
     public class TransferAppCQRSContext : DbContext
     {
-        public DbSet<Transfer> Transfers { get; set; }
+        public TransferAppCQRSContext(DbContextOptions<TransferAppCQRSContext> options): base(options)
+        {
+        }
+
+        //public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new TransferMap());
+            //modelBuilder.ApplyConfiguration(new TransferMap());
+            modelBuilder.ApplyConfiguration(new CustomerMap());
+            modelBuilder.ApplyConfiguration(new AccountMap());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -2,7 +2,7 @@
 
 namespace TransferAppCQRS.Domain.Interfaces
 {
-    public interface ICustomerRepository : IRepository<Customer>
+    public interface ICustomerRepository : IBaseRepository<Customer>
     {
         Customer GetByEmail(string email);
     }

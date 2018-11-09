@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TransferAppCQRS.WebApi.ViewModels
 {
     public class TransferViewModel
     {
-        public Guid Origin { get; set; }
+        public Guid OriginId { get; set; }
 
-        public Guid Recipient { get; set; }
+        public Guid RecipientId { get; set; }
 
         public string Description { get; set; }
 

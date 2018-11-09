@@ -1,14 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using TransferAppCQRS.Domain.Interfaces;
-using TransferAppCQRS.Domain.Models;
 using TransferAppCQRS.Infra.Data.Context;
 
 namespace TransferAppCQRS.Infra.Data.DomainRepositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly TransferAppCQRSContext Db;
         protected readonly DbSet<TEntity> DbSet;

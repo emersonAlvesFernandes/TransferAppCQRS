@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TransferAppCQRS.Domain.Core.Events;
 
 namespace TransferAppCQRS.Domain.Core.Notifications

@@ -15,17 +15,17 @@ namespace TransferAppCQRS.Domain.Validations
 
         protected void ValidateCustomers()
         {
-            RuleFor(c => c.Origin)
+            RuleFor(c => c.OriginId)
                 .NotNull();
 
-            RuleFor(c => c.Recipient)
+            RuleFor(c => c.RecipientId)
                 .NotNull();
         }
 
         protected void ValidateScheduledDatetime()
         {
             RuleFor(c => c.ScheduledDate.Value.Date)
-                .GreaterThanOrEqualTo(DateTime.Now.Date);                
-        }        
+                .GreaterThanOrEqualTo(DateTime.Now.Date);
+        }
     }
 }

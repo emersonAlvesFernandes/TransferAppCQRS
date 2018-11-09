@@ -21,7 +21,7 @@ namespace TransferAppCQRS.Domain.Models
         public string Email { get; private set; }
         
         public DateTime BirthDate { get; private set; }
-
+        
         public Account Account { get; set; }
     }
 }

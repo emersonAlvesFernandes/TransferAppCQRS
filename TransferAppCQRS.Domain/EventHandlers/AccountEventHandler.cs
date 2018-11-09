@@ -5,12 +5,11 @@ using TransferAppCQRS.Domain.Events;
 
 namespace TransferAppCQRS.Domain.EventHandlers
 {
-    public class CustomerEventHandler : INotificationHandler<CustomerRegisteredEvent>
+    public class AccountEventHandler : INotificationHandler<AccountRegisteredEvent>
     {
-        public Task Handle(CustomerRegisteredEvent notification, CancellationToken cancellationToken)
+        public Task Handle(AccountRegisteredEvent notification, CancellationToken cancellationToken)
         {
             // Send some greetings e-mail
-            //return Task.FromResult<object>(null);
             return null;
         }
     }

@@ -35,16 +35,16 @@ namespace TransferAppCQRS.Infra.IoC
             // Domain - Events
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
             services.AddScoped<INotificationHandler<CustomerRegisteredEvent>, CustomerEventHandler>();
-            //services.AddScoped<INotificationHandler<CustomerUpdatedEvent>, CustomerEventHandler>();
-            //services.AddScoped<INotificationHandler<CustomerRemovedEvent>, CustomerEventHandler>();
+            services.AddScoped<INotificationHandler<AccountRegisteredEvent>, AccountEventHandler>();
 
             // Domain - Commands
             services.AddScoped<INotificationHandler<RegisterNewCustomerCommand>, CustomerCommandHandler>();
-            //services.AddScoped<INotificationHandler<UpdateCustomerCommand>, CustomerCommandHandler>();
-            //services.AddScoped<INotificationHandler<RemoveCustomerCommand>, CustomerCommandHandler>();
+            services.AddScoped<INotificationHandler<RegisterNewAccountCommand>, AccountCommandHandler>();
 
             // Infra - Data
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ITransferRepository, TransferRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<EquinoxContext>();
 

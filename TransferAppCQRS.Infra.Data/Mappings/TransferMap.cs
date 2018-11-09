@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TransferAppCQRS.Domain.Models;
 
 namespace TransferAppCQRS.Infra.Data.Mappings
@@ -12,14 +9,16 @@ namespace TransferAppCQRS.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Transfer> builder)
         {
             builder.Property(c => c.Id)
-                .HasColumnName("uid_movimentacao_transferencia");
+                .HasColumnName("uid_transfer");
 
-            builder.Property(c => c.Origin.Id)
-                .HasColumnName("uid_conta_origem");
+            //builder.Property(c => c.Origin.Id)
+            //    .HasColumnName("uid_conta_origem");
 
-            builder.Property(c => c.Recipient.Id)
-                .HasColumnName("uid_conta_destino");
-
+            //builder.Property(c => c.Recipient.Id)
+            //    .HasColumnName("uid_conta_destino");
+            builder.Ignore(c => c.Origin);
+            builder.Ignore(c => c.Recipient);
+                
             builder.Property(c => c.Description)
                 .HasColumnName("ds_descricao");
 
@@ -28,8 +27,8 @@ namespace TransferAppCQRS.Infra.Data.Mappings
 
             builder.Property(c => c.Value)
                 .HasColumnName("dt_transacao");
-
-            builder.ToTable("tbl_movimentacao_transferencia");
+            
+            builder.ToTable("tbl_transfer");
         }
     }
 }

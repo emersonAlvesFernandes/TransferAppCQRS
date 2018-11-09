@@ -36,8 +36,8 @@ namespace TransferAppCQRS.Domain.CommandHandlers
         public bool Commit()
         {
             if (_notifications.HasNotifications()) return false;
-            var commandResponse = _uow.Commit();
-            if (commandResponse.Success) return true;
+            
+            if (_uow.Commit()) return true;
 
             _bus.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
             return false;

@@ -5,6 +5,7 @@ namespace TransferAppCQRS.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        CommandResponse Commit();
+        bool Commit();
+        void Dispose();
     }
 }
