@@ -10,5 +10,7 @@ namespace TransferAppCQRS.Domain.Commands
         public int Number { get; protected set; }
         public string Address { get; protected set; }
         public Guid CustomerGuid { get; set; }
+
+        public bool ExistsInDatabase { get; protected set; }
     }
 }

@@ -10,6 +10,7 @@ namespace TransferAppCQRS.Domain.Validations
             ValidateAddress();
             ValidateAgency();
             ValidateNumber();
+            ValidateDuplicity();
         }
     }
 }

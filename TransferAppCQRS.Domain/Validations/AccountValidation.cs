@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using TransferAppCQRS.Domain.Commands;
-using TransferAppCQRS.Domain.Interfaces;
 
 namespace TransferAppCQRS.Domain.Validations
 {
@@ -19,6 +18,11 @@ namespace TransferAppCQRS.Domain.Validations
         protected void ValidateAddress()
         {
             RuleFor(c => c.Agency).NotEmpty();
-        }        
+        }
+
+        protected void ValidateDuplicity()
+        {
+            RuleFor(c => c.ExistsInDatabase).Must(x => !x);
+        }
     }
 }
