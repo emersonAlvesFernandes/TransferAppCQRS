@@ -22,7 +22,8 @@ namespace TransferAppCQRS.Domain.Validations
 
         protected void ValidateDuplicity()
         {
-            RuleFor(c => c.ExistsInDatabase).Must(x => !x);
+            RuleFor(c => c.ExistsInDatabase).Must(x => !x)
+                .WithMessage("Agência já cadastrada");
         }
     }
 }
