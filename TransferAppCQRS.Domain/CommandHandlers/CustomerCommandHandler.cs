@@ -19,14 +19,17 @@ namespace TransferAppCQRS.Domain.CommandHandlers
         private readonly ICustomerRepository _customerRepository;
         private readonly ICustomerWriteNoSqlRepository _customerWriteNoSql;
         private readonly IMediatorHandler Bus;
+        private readonly IQueueManager _queueManager;
 
         public CustomerCommandHandler(ICustomerRepository customerRepository,
             IUnitOfWork uow,
             IMediatorHandler bus,
+            IQueueManager queueManager,
             ICustomerWriteNoSqlRepository customerWriteNoSql,
             INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _customerRepository = customerRepository;
+            _queueManager = queueManager;
             _customerWriteNoSql = customerWriteNoSql;
             Bus = bus;
         }
@@ -56,7 +59,8 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             if (Commit())
             {
                 Bus.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-                _customerWriteNoSql.InsertOne(new CustomerReadNoSql(customer));
+                //_customerWriteNoSql.InsertOne(new CustomerReadNoSql(customer));
+                _queueManager.Publish(customer);
             }
 
             return Task.FromResult<RegisterNewCustomerCommand>(message);

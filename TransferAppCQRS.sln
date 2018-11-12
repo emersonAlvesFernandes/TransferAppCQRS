@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.WebApi", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.Data.NoSql", "TransferAppCQRS.Infra.Data.NoSql\TransferAppCQRS.Infra.Data.NoSql.csproj", "{AF619687-60C3-4357-9615-B72B5EB89C59}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.CrossCutting.QueueManager", "TransferAppCQRS.Infra.CrossCutting.QueueManager\TransferAppCQRS.Infra.CrossCutting.QueueManager.csproj", "{BC65201D-AB24-4FB7-8206-14C9644F476C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{AF619687-60C3-4357-9615-B72B5EB89C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF619687-60C3-4357-9615-B72B5EB89C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF619687-60C3-4357-9615-B72B5EB89C59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC65201D-AB24-4FB7-8206-14C9644F476C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC65201D-AB24-4FB7-8206-14C9644F476C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC65201D-AB24-4FB7-8206-14C9644F476C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC65201D-AB24-4FB7-8206-14C9644F476C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

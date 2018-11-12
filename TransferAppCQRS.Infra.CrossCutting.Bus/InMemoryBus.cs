@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System;
 using System.Threading.Tasks;
 using TransferAppCQRS.Domain.Core.Bus;
 using TransferAppCQRS.Domain.Core.Commands;

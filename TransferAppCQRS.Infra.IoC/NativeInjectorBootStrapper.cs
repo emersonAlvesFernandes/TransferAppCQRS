@@ -10,6 +10,7 @@ using TransferAppCQRS.Domain.Events;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.ModelsNoSql.Contracts;
 using TransferAppCQRS.Infra.CrossCutting.Bus;
+using TransferAppCQRS.Infra.CrossCutting.QueueManager;
 using TransferAppCQRS.Infra.Data.DomainRepositories;
 using TransferAppCQRS.Infra.Data.EventSourcingRepository;
 using TransferAppCQRS.Infra.Data.NoSql.Repositories;
@@ -26,6 +27,7 @@ namespace TransferAppCQRS.Infra.IoC
 
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, InMemoryBus>();
+            services.AddScoped<IQueueManager, QueueManager>();
 
             // ASP.NET Authorization Polices
             //services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>(); ;
