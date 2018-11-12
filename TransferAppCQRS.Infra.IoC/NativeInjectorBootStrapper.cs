@@ -8,9 +8,11 @@ using TransferAppCQRS.Domain.Core.Notifications;
 using TransferAppCQRS.Domain.EventHandlers;
 using TransferAppCQRS.Domain.Events;
 using TransferAppCQRS.Domain.Interfaces;
+using TransferAppCQRS.Domain.ModelsNoSql.Contracts;
 using TransferAppCQRS.Infra.CrossCutting.Bus;
 using TransferAppCQRS.Infra.Data.DomainRepositories;
 using TransferAppCQRS.Infra.Data.EventSourcingRepository;
+using TransferAppCQRS.Infra.Data.NoSql.Repositories;
 using TransferAppCQRS.Infra.Data.UoW;
 
 namespace TransferAppCQRS.Infra.IoC
@@ -46,6 +48,10 @@ namespace TransferAppCQRS.Infra.IoC
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ITransferRepository, TransferRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<ICustomerReadNoSql, CusomerReadRepository>();
+            services.AddScoped<ICustomerWriteNoSqlRepository, CustomerWriteRepository>();
+
             //services.AddScoped<EquinoxContext>();
 
             // Infra - Data EventSourcing

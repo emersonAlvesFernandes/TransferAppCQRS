@@ -7,6 +7,7 @@ using TransferAppCQRS.Domain.Core.Bus;
 using TransferAppCQRS.Domain.Core.Events;
 using TransferAppCQRS.Domain.Core.Notifications;
 using TransferAppCQRS.Domain.Interfaces;
+using TransferAppCQRS.Domain.ModelsNoSql.Contracts;
 using TransferAppCQRS.WebApi.ViewModels;
 
 namespace TransferAppCQRS.WebApi.Controllers
@@ -14,14 +15,16 @@ namespace TransferAppCQRS.WebApi.Controllers
     public class CustomerController : ApiController
     {
         private readonly IMapper _mapper;
-        private readonly ICustomerRepository _customerRepository;
+        //private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerReadNoSql _customerRepository;
         private readonly IEventStore _eventStoreRepository;
         private readonly IMediatorHandler Bus;
 
         public CustomerController(
             INotificationHandler<DomainNotification> notifications,
             IMapper mapper,
-            ICustomerRepository customerRepository,
+            //ICustomerRepository customerRepository,
+            ICustomerReadNoSql customerRepository,
             IEventStore eventStoreRepository,
             IMediatorHandler bus,
             IMediatorHandler mediator) : base(notifications, mediator)

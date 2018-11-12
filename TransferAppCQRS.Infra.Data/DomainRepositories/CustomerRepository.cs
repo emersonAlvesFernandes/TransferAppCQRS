@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.Models;
 using TransferAppCQRS.Infra.Data.Context;

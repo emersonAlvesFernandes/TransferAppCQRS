@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Domain", "TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj", "{2A3B007B-3EA5-4492-AA9C-7D9D2C6CD08E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.Domain", "TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj", "{2A3B007B-3EA5-4492-AA9C-7D9D2C6CD08E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Domain.Core", "TransferAppCQRS.Domain.Core\TransferAppCQRS.Domain.Core.csproj", "{25F5421F-B8DC-4624-BFA2-7F107206713A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.Domain.Core", "TransferAppCQRS.Domain.Core\TransferAppCQRS.Domain.Core.csproj", "{25F5421F-B8DC-4624-BFA2-7F107206713A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.Data", "TransferAppCQRS.Infra.Data\TransferAppCQRS.Infra.Data.csproj", "{D597AE9C-DB4B-42E7-A7CB-0FDCE7766295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.Infra.Data", "TransferAppCQRS.Infra.Data\TransferAppCQRS.Infra.Data.csproj", "{D597AE9C-DB4B-42E7-A7CB-0FDCE7766295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.IoC", "TransferAppCQRS.Infra.IoC\TransferAppCQRS.Infra.IoC.csproj", "{ADD57EDB-CEDB-461D-9C91-50475B978298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.Infra.IoC", "TransferAppCQRS.Infra.IoC\TransferAppCQRS.Infra.IoC.csproj", "{ADD57EDB-CEDB-461D-9C91-50475B978298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.CrossCutting.Bus", "TransferAppCQRS.Infra.CrossCutting.Bus\TransferAppCQRS.Infra.CrossCutting.Bus.csproj", "{65E354EB-C97C-4042-ADCE-54DF8E60AEEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.Infra.CrossCutting.Bus", "TransferAppCQRS.Infra.CrossCutting.Bus\TransferAppCQRS.Infra.CrossCutting.Bus.csproj", "{65E354EB-C97C-4042-ADCE-54DF8E60AEEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.WebApi", "TransferAppCQRS.WebApi\TransferAppCQRS.WebApi.csproj", "{EEA16CF9-08A5-4FAC-9E09-524FBEA08EA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransferAppCQRS.WebApi", "TransferAppCQRS.WebApi\TransferAppCQRS.WebApi.csproj", "{EEA16CF9-08A5-4FAC-9E09-524FBEA08EA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransferAppCQRS.Infra.Data.NoSql", "TransferAppCQRS.Infra.Data.NoSql\TransferAppCQRS.Infra.Data.NoSql.csproj", "{AF619687-60C3-4357-9615-B72B5EB89C59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{EEA16CF9-08A5-4FAC-9E09-524FBEA08EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEA16CF9-08A5-4FAC-9E09-524FBEA08EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEA16CF9-08A5-4FAC-9E09-524FBEA08EA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF619687-60C3-4357-9615-B72B5EB89C59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF619687-60C3-4357-9615-B72B5EB89C59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF619687-60C3-4357-9615-B72B5EB89C59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF619687-60C3-4357-9615-B72B5EB89C59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

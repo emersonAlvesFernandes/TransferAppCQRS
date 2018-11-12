@@ -8,6 +8,8 @@ using TransferAppCQRS.Domain.Core.Notifications;
 using TransferAppCQRS.Domain.Events;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.Models;
+using TransferAppCQRS.Domain.ModelsNoSql;
+using TransferAppCQRS.Domain.ModelsNoSql.Contracts;
 
 namespace TransferAppCQRS.Domain.CommandHandlers
 {
@@ -15,15 +17,17 @@ namespace TransferAppCQRS.Domain.CommandHandlers
         INotificationHandler<RegisterNewCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;
-
+        private readonly ICustomerWriteNoSqlRepository _customerWriteNoSql;
         private readonly IMediatorHandler Bus;
 
         public CustomerCommandHandler(ICustomerRepository customerRepository,
             IUnitOfWork uow,
             IMediatorHandler bus,
+            ICustomerWriteNoSqlRepository customerWriteNoSql,
             INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _customerRepository = customerRepository;
+            _customerWriteNoSql = customerWriteNoSql;
             Bus = bus;
         }
 
@@ -52,6 +56,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             if (Commit())
             {
                 Bus.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
+                _customerWriteNoSql.InsertOne(new CustomerReadNoSql(customer));
             }
 
             return Task.FromResult<RegisterNewCustomerCommand>(message);

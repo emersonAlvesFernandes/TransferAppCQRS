@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TransferAppCQRS.Domain.Interfaces
@@ -11,5 +12,18 @@ namespace TransferAppCQRS.Domain.Interfaces
         void Update(TEntity obj);
         void Remove(Guid id);
         int SaveChanges();
+    }
+
+    public interface IBaseWriteRepository<TEntity> where TEntity : class
+    {
+        void Add(TEntity obj);
+        void Update(TEntity obj);
+        int SaveChanges();
+    }
+
+    public interface IBaseReadRepository<TEntity> where TEntity : class
+    {
+        TEntity GetById(Guid id);
+        List<TEntity> GetAll();
     }
 }

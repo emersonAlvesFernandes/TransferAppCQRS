@@ -13,6 +13,7 @@
     <ProjectReference Include="..\TransferAppCQRS.Domain.Core\TransferAppCQRS.Domain.Core.csproj" />
     <ProjectReference Include="..\TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj" />
     <ProjectReference Include="..\TransferAppCQRS.Infra.CrossCutting.Bus\TransferAppCQRS.Infra.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\TransferAppCQRS.Infra.Data.NoSql\TransferAppCQRS.Infra.Data.NoSql.csproj" />
     <ProjectReference Include="..\TransferAppCQRS.Infra.Data\TransferAppCQRS.Infra.Data.csproj" />
   </ItemGroup>
 

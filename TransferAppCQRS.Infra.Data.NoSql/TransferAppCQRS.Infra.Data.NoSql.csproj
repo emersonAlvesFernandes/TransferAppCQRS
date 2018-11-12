@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.0.100" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TransferAppCQRS.Domain.Core\TransferAppCQRS.Domain.Core.csproj" />
+    <ProjectReference Include="..\TransferAppCQRS.Domain\TransferAppCQRS.Domain.csproj" />
   </ItemGroup>
 
 </Project>
