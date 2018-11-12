@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using TransferAppCQRS.Domain.Commands;
 using TransferAppCQRS.Domain.Core.Bus;
 using TransferAppCQRS.Domain.Core.Events;
@@ -46,10 +47,16 @@ namespace TransferAppCQRS.WebApi.Controllers
             var registerCommand = _mapper.Map<RegisterNewCustomerCommand>(customerViewModel);            
 
             Bus.SendCommand(registerCommand);
-
-            //_customerAppService.Register(customerViewModel);
-
+            
             return Response(customerViewModel);
         }
+
+        [HttpGet]
+        [Route("customer")]
+        public async Task<IActionResult> GetAsync() 
+            => Response(await Task.Run(() => _customerRepository.GetAll()));
+        
+
+        
     }
 }
