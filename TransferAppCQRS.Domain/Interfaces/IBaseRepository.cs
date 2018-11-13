@@ -16,9 +16,8 @@ namespace TransferAppCQRS.Domain.Interfaces
 
     public interface IBaseWriteRepository<TEntity> where TEntity : class
     {
-        void Add(TEntity obj);
-        void Update(TEntity obj);
-        int SaveChanges();
+        void InsertOne(TEntity obj);
+        void InsertMany(List<TEntity> objCollection);
     }
 
     public interface IBaseReadRepository<TEntity> where TEntity : class

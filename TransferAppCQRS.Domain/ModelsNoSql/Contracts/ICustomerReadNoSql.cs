@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TransferAppCQRS.Domain.Interfaces;
 
 namespace TransferAppCQRS.Domain.ModelsNoSql.Contracts
 {
-    public interface ICustomerReadNoSql
+    public interface ICustomerReadNoSql : IBaseReadRepository<CustomerReadNoSql>
     {
-        IEnumerable<CustomerReadNoSql> GetAll();
+        //IEnumerable<CustomerReadNoSql> GetAll();
     }
 }

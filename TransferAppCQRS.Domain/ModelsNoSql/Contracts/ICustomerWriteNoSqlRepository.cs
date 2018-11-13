@@ -1,9 +1,9 @@
-﻿using TransferAppCQRS.Domain.Models;
+﻿using TransferAppCQRS.Domain.Interfaces;
 
 namespace TransferAppCQRS.Domain.ModelsNoSql.Contracts
 {
-    public interface ICustomerWriteNoSqlRepository
+    public interface ICustomerWriteNoSqlRepository : IBaseWriteRepository<CustomerReadNoSql>
     {
-        void InsertOne(CustomerReadNoSql customer);
+        
     }
 }
