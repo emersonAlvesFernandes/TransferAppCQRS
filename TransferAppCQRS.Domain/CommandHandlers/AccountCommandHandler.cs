@@ -17,15 +17,18 @@ namespace TransferAppCQRS.Domain.CommandHandlers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMediatorHandler _bus;
+        private readonly IQueueManager _queueManager;
 
         public AccountCommandHandler(
             IUnitOfWork uow,
             IAccountRepository accountRepository,
             IMediatorHandler bus,
+            IQueueManager queueManager,
             INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _accountRepository = accountRepository;
             _bus = bus;
+            _queueManager = queueManager;
         }
 
         public Task Handle(RegisterNewAccountCommand command, CancellationToken cancellationToken)
@@ -42,8 +45,10 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             _accountRepository.Add(account);
 
             if (Commit())
+            {
                 _bus.RaiseEvent(new AccountRegisteredEvent(account));
-
+                _queueManager.Publish(account, "accountRK");
+            }
 
             return Task.FromResult<RegisterNewAccountCommand>(command);
         }

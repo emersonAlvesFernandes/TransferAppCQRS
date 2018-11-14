@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
-using System.IO;
 using System.Text;
 using TransferAppCQRS.Domain.Core.Bus;
 
@@ -16,7 +14,7 @@ namespace TransferAppCQRS.Infra.CrossCutting.QueueManager
         private readonly string _username;
         private readonly string _password;
         private readonly string _exchange;
-        private readonly string _routingKey;
+        private string _routingKey;
         private readonly string _type;
 
         public QueueManager(IConfiguration _config)
@@ -30,8 +28,9 @@ namespace TransferAppCQRS.Infra.CrossCutting.QueueManager
             _type = _config["RabbitMq:Type"];
         }
 
-        public void Publish<T>(T value) where T : class
+        public void Publish<T>(T value, string routingKey) where T : class
         {
+            _routingKey = routingKey;
             //var factory = new ConnectionFactory()
             //{
             //    HostName = "localhost",
@@ -51,7 +50,7 @@ namespace TransferAppCQRS.Infra.CrossCutting.QueueManager
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: _exchange, type: _type);
+                channel.ExchangeDeclare(exchange: _exchange, type: _type, durable: true);
                 
                 var message = JsonConvert.SerializeObject(value);
 

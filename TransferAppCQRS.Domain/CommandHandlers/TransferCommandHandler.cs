@@ -13,7 +13,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
 {
     public class TransferCommandHandler : CommandHandler, INotificationHandler<RegisterNewTransferCommand>
     {
-        private readonly TransferSqlRepository _sqlRepository;
+        private readonly TransferSqlRepository _transferDb;
         private readonly IAccountRepository _sqlAccountRepository;
         private readonly IMediatorHandler _bus;        
 
@@ -24,7 +24,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             IMediatorHandler bus,            
             INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
-            _sqlRepository = sqlRepository;
+            _transferDb = sqlRepository;
             _sqlAccountRepository = sqlAccountRepository;
             _bus = bus;
         }
@@ -51,11 +51,11 @@ namespace TransferAppCQRS.Domain.CommandHandlers
                 return Task.CompletedTask;
             }
 
-            ValidateFunds(command);
+            //ValidateFunds(command);
 
             var transfer = new Transfer(Guid.NewGuid(), origin, recipient, command.Description, command.ScheduledDate, command.Value);
 
-            _sqlRepository.Add(transfer);
+            _transferDb.Add(transfer);
 
             this.UpdateTransferAccountsBalance(command);
 
@@ -65,18 +65,18 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             return Task.FromResult<RegisterNewTransferCommand>(command);
         }
 
-        private bool ValidateFunds(RegisterNewTransferCommand command)
-        {
-            var actualBalance = _sqlAccountRepository.GetBalance(command.OriginId);
+        //private bool ValidateFunds(RegisterNewTransferCommand command)
+        //{
+        //    var actualBalance = _sqlAccountRepository.GetBalance(command.OriginId);
 
-            if (actualBalance < command.Value)
-            {
-                _bus.RaiseEvent(new DomainNotification(command.MessageType, "Insuficient funds."));
-                return false;
-            }
+        //    if (actualBalance < command.Value)
+        //    {
+        //        _bus.RaiseEvent(new DomainNotification(command.MessageType, "Insuficient funds."));
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void UpdateTransferAccountsBalance(RegisterNewTransferCommand command)
         {

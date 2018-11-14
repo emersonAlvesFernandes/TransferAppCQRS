@@ -1,6 +1,5 @@
 ﻿using System;
 using TransferAppCQRS.Domain.Core.Commands;
-using TransferAppCQRS.Domain.Models;
 
 namespace TransferAppCQRS.Domain.Commands
 {
@@ -19,5 +18,8 @@ namespace TransferAppCQRS.Domain.Commands
         public DateTime? ScheduledDate { get; protected set; }
 
         public double Value { get; protected set; }
+
+
+        public bool OriginAccountHasSuficientFunds { get; set; }
     }
 }

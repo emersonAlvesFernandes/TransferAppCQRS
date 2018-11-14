@@ -9,6 +9,7 @@ namespace TransferAppCQRS.Domain.Validations
             ValidateCustomers();
             ValidateValue();
             ValidateScheduledDatetime();
+            AssertOriginAccountHasSuficientFunds();
         }
     }
 }

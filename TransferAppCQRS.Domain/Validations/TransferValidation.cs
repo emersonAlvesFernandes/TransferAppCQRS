@@ -27,5 +27,11 @@ namespace TransferAppCQRS.Domain.Validations
             RuleFor(c => c.ScheduledDate.Value.Date)
                 .GreaterThanOrEqualTo(DateTime.Now.Date);
         }
+
+        protected void AssertOriginAccountHasSuficientFunds()
+        {
+            RuleFor(c => c.OriginAccountHasSuficientFunds).Must(x => !x)
+                .WithMessage("Saldo insuficiente");            
+        }
     }
 }

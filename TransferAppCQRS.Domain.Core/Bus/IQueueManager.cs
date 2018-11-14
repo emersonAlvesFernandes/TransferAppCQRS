@@ -5,6 +5,6 @@ namespace TransferAppCQRS.Domain.Core.Bus
 {
     public interface IQueueManager
     {
-        void Publish<T>(T command) where T : class;
+        void Publish<T>(T command, string routingKey) where T : class;
     }
 }
