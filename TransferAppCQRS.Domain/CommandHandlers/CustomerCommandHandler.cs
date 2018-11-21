@@ -8,7 +8,6 @@ using TransferAppCQRS.Domain.Core.Notifications;
 using TransferAppCQRS.Domain.Events;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.Models;
-using TransferAppCQRS.Domain.ModelsNoSql;
 using TransferAppCQRS.Domain.ModelsNoSql.Contracts;
 
 namespace TransferAppCQRS.Domain.CommandHandlers
