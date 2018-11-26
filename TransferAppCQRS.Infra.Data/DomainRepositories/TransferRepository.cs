@@ -1,14 +1,21 @@
-using System;
+using Microsoft.EntityFrameworkCore;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.Models;
+using TransferAppCQRS.Infra.Data.Context;
 
 namespace TransferAppCQRS.Infra.Data.DomainRepositories
 {
     public class TransferRepository : ITransferRepository
     {
-        public void Add(Transfer transfer)
+        protected readonly TransferAppCQRSContext Db;
+        protected readonly DbSet<Transfer> DbSet;
+
+        public TransferRepository(TransferAppCQRSContext context)
         {
-            throw new NotImplementedException();
+            Db = context;
+            DbSet = Db.Set<Transfer>();
         }
+
+        public void Add(Transfer transfer) => DbSet.Add(transfer);                    
     }
 }

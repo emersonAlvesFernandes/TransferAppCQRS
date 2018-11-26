@@ -15,12 +15,14 @@ namespace TransferAppCQRS.Infra.Data.Context
         //public DbSet<Transfer> Transfers { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Account> Transfers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfiguration(new TransferMap());
             modelBuilder.ApplyConfiguration(new CustomerMap());
             modelBuilder.ApplyConfiguration(new AccountMap());
+            modelBuilder.ApplyConfiguration(new TransferMap());
 
             base.OnModelCreating(modelBuilder);
         }

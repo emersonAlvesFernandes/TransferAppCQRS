@@ -14,9 +14,17 @@ namespace TransferAppCQRS.Domain.Models
         {
             Id = id;
             Origin = origin;
+            OriginGuid = origin.Id;
             Recipient = recipient;
+            RecipientGuid = recipient.Id;
             Description = description;
-            ScheduledDate = datetime == null ? DateTime.Now : ScheduledDate;
+
+
+
+            //ScheduledDate = datetime == DateTime.MinValue() ? DateTime.Now : datetime;
+
+            ScheduledDate = datetime.Value;
+
             Value = value;
         }
 

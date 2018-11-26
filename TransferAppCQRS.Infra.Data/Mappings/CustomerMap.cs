@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using TransferAppCQRS.Domain.Models;
 
 namespace TransferAppCQRS.Infra.Data.Mappings
@@ -9,9 +8,9 @@ namespace TransferAppCQRS.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.Property(c => c.Id)
-                .HasColumnName("uid_customer");
-
+            builder.HasKey(c => c.Id);
+            builder.Property(c => c.Id).HasColumnName("uid_customer");
+            
             builder.Property(c => c.Name)
                 .HasColumnName("name");
 

@@ -8,8 +8,10 @@ namespace TransferAppCQRS.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id)
-                .HasColumnName("uid_account");
+                .HasColumnName("uid_account")
+                .HasColumnType("uniqueidentifier");
 
             builder.Property(x => x.Agency)
                 .HasColumnName("agency");
@@ -23,7 +25,8 @@ namespace TransferAppCQRS.Infra.Data.Mappings
             builder.Property(x => x.CustomerGuId)
                 .HasColumnName("uid_customer");
 
-            builder.HasOne(a => a.Customer)
+            builder
+                .HasOne(a => a.Customer)
                 .WithOne(b => b.Account)
                 .HasForeignKey<Account>(a => a.CustomerGuId);
 

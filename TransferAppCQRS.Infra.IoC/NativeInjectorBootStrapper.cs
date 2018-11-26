@@ -44,6 +44,8 @@ namespace TransferAppCQRS.Infra.IoC
             // Domain - Commands
             services.AddScoped<INotificationHandler<RegisterNewCustomerCommand>, CustomerCommandHandler>();
             services.AddScoped<INotificationHandler<RegisterNewAccountCommand>, AccountCommandHandler>();
+            services.AddScoped<INotificationHandler<RegisterNewTransferCommand>, TransferCommandHandler>();
+            
 
             // Infra - Data
             services.AddScoped<ICustomerRepository, CustomerRepository>();

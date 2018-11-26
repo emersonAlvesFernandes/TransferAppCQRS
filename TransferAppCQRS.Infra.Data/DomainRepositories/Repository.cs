@@ -22,7 +22,7 @@ namespace TransferAppCQRS.Infra.Data.DomainRepositories
         }
 
         public virtual TEntity GetById(Guid id)
-        {
+        {            
             return DbSet.Find(id);
         }
 

@@ -47,6 +47,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             if (Commit())
             {
                 _bus.RaiseEvent(new AccountRegisteredEvent(account));
+
                 _queueManager.Publish(account, "accountRK");
             }
 

@@ -155,10 +155,24 @@ dt_criacao	datetime
 id_usuario	int			
 
 
+============
+
+TODO:
+- Serviço de consulta de Guid de customer por telefone;
+- Criar Collection com os lançamentos (crédito e débito) de transferência;
+- Criar Collection para armazenar o saldo;
+- Criar api para gravar estas informações no mongoDb;
+- Criar mecanismo de leitura destas informações no transferAppCQRS;
 
 
-
-
+Coleções:
+	Customers [OK] TransferAppCQRS.WriteNoSql
+	Customers por idade [OK] TransferAppCQRS.WriteNoSql
+	Transferências [OK]
+	Transferência por Customers (feitas e recebidas)
+	Saldo por Customers
+	Account > Customer [OK] TransferAppCQRS.CustomerAccount
+	
 
 
 

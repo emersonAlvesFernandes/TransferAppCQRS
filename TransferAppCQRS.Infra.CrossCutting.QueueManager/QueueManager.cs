@@ -39,7 +39,7 @@ namespace TransferAppCQRS.Infra.CrossCutting.QueueManager
             //    Password = "guest",
             //};
 
-            var factory = new ConnectionFactory()
+            var factory = new ConnectionFactory
             {
                 HostName = _hostname,
                 Port = _port,

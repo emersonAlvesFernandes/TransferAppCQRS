@@ -19,7 +19,16 @@ namespace TransferAppCQRS.Domain.Validations
                 .NotNull();
 
             RuleFor(c => c.RecipientId)
-                .NotNull();
+                .NotNull();            
+        }
+
+        protected void ValidateAccounts()
+        {
+            RuleFor(x => x.OriginAccountIsValid).Must(x => x)
+                .WithMessage("Conta de origem não encontrada");
+
+            RuleFor(x => x.RecipientnAccountIsValid).Must(x => x)
+                .WithMessage("Conta destino não encontrada");
         }
 
         protected void ValidateScheduledDatetime()
@@ -30,7 +39,7 @@ namespace TransferAppCQRS.Domain.Validations
 
         protected void AssertOriginAccountHasSuficientFunds()
         {
-            RuleFor(c => c.OriginAccountHasSuficientFunds).Must(x => !x)
+            RuleFor(c => c.OriginAccountHasSuficientFunds).Must(x => x)
                 .WithMessage("Saldo insuficiente");            
         }
     }

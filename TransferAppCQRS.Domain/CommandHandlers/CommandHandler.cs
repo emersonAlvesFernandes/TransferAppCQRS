@@ -27,8 +27,6 @@ namespace TransferAppCQRS.Domain.CommandHandlers
         {
             foreach (var error in message.ValidationResult.Errors)
             {
-                //  Como o Mediatr Sabe qual é o Handler que recebe a notificação 
-                //  se ele passa um Domain Notification ao invés de um CustomerRegisteredEvent
                 _bus.RaiseEvent(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
         }

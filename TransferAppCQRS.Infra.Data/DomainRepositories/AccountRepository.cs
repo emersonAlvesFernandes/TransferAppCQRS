@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using TransferAppCQRS.Domain.Interfaces;
 using TransferAppCQRS.Domain.Models;
@@ -18,12 +19,20 @@ namespace TransferAppCQRS.Infra.Data.DomainRepositories
 
         public double GetBalance(Guid guid)
         {
-            throw new NotImplementedException();
+            return 100;
         }
+
+        public new Account GetById(Guid id) 
+            => DbSet.FirstOrDefault(x => x.Id == id);
+
+        public Account GetFullById(Guid id)
+            => Db.Accounts
+                .Include(x => x.Customer)
+                .FirstOrDefault(x => x.Id == id);
 
         public void UpdateBalance(Guid guid, double value)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

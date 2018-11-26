@@ -58,7 +58,7 @@ namespace TransferAppCQRS.Domain.CommandHandlers
             if (Commit())
             {
                 Bus.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-                //_customerWriteNoSql.InsertOne(new CustomerReadNoSql(customer));
+                
                 _queueManager.Publish(customer, "customerRK");
             }
 

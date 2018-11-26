@@ -7,6 +7,7 @@ namespace TransferAppCQRS.Domain.Validations
         public RegisterNewTransferCommandValidation()
         {
             ValidateCustomers();
+            ValidateAccounts();
             ValidateValue();
             ValidateScheduledDatetime();
             AssertOriginAccountHasSuficientFunds();
